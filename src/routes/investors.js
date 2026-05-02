@@ -3,7 +3,6 @@ const { pool } = require('../db');
 const { NotFoundError } = require('../errors');
 const {
     InvestorCreateSchema,
-    UuidSchema,
 } = require('../validation/schemas');
 
 const router = express.Router();

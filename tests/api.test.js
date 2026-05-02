@@ -1,12 +1,17 @@
 const request = require('supertest');
 const { app } = require('../src/app');
 const { pool } = require('../src/db');
+const fs = require('fs');
+const path = require('path');
 
 beforeEach(async () => {
     await pool.query('TRUNCATE investments, investors, funds CASCADE');
 });
 
 afterAll(async () => {
+    await pool.query('TRUNCATE investments, investors, funds CASCADE');
+    const seed = fs.readFileSync(path.join(__dirname, '../seed.sql'), 'utf8');
+    await pool.query(seed);
     await pool.end();
 });
 

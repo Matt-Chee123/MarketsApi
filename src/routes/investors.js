@@ -23,7 +23,7 @@ router.post('/', async (req, res, next) => {
         const data = InvestorCreateSchema.parse(req.body);
         const { rows } = await pool.query(
             `INSERT INTO investors (name, investor_type, email)
-               VALUES ($1, $2, $3)`,
+               VALUES ($1, $2, $3) RETURNING *`,
             [data.name, data.investor_type, data.email],
         )
         res.status(201).json(rows[0])

@@ -11,7 +11,7 @@ const router = express.Router({ mergeParams: true });
 async function ensureFundExists(fundId) {
     const {rows} = await pool.query('SELECT 1 FROM funds WHERE id = $1', [fundId]);
     if (rows.length === 0) {
-        throw new NotFoundError();
+        throw new NotFoundError('Fund');
     }
 }
 
@@ -19,8 +19,8 @@ router.get('/', async (req, res, next) => {
     try {
         const fundId = UuidSchema.parse(req.params.fund_id);
         await ensureFundExists(fundId);
-        const { rows } = await pool.query('' +
-            'SELECT * FROM investments WHERE fund_id = $1'
+        const { rows } = await pool.query(
+            'SELECT * FROM investments WHERE fund_id = $1 ORDER BY investment_date DESC'
             , [fundId]);
         res.json(rows);
     } catch (error) {

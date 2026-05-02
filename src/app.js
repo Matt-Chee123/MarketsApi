@@ -17,11 +17,9 @@ app.get('/health', async (req, res, next) => {
     }
 });
 
-app.use('/funds', fundsRouter)
-
-app.use('/investors', investorsRouter)
-
-app.use('/funds/:fund_id/investments', investmentsRouter)
+app.use('/funds', fundsRouter);
+app.use('/investors', investorsRouter);
+app.use('/funds/:fund_id/investments', investmentsRouter);
 
 app.use(errorMiddleware);
 

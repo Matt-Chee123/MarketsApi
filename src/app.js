@@ -21,7 +21,7 @@ app.use('/funds', fundsRouter)
 
 app.use('/investors', investorsRouter)
 
-// app.use('/funds/:fund_id/investments', investmentsRouter)
+app.use('/funds/:fund_id/investments', investmentsRouter)
 
 app.use(errorMiddleware);
 

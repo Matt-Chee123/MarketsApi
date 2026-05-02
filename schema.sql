@@ -12,7 +12,8 @@ CREATE TABLE investors (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name TEXT NOT NULL,
     investor_type TEXT NOT NULL CHECK (investor_type IN ('Individual', 'Institution', 'Family Office')),
-    email TEXT NOT NULL UNIQUE
+    email TEXT NOT NULL UNIQUE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE investments (
